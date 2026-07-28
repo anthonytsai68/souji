@@ -364,7 +364,7 @@ struct AboutSettingsView: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 HStack(spacing: 16) {
-                    Link(destination: URL(string: "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=admin@wow.to&currency_code=USD")!) {
+                    Link(destination: URL(string: "https://www.paypal.com/ncp/payment/LCPQVCA6EP69W")!) {
                         Label("PayPal", systemImage: "heart.fill")
                             .foregroundStyle(.white)
                             .padding(.horizontal, 20)
