@@ -182,10 +182,10 @@ struct DashboardView: View {
                 ? (String(localized: "Ready"), "checkmark.circle.fill", Tint.green)
                 : (String(localized: "Limited access"), "lock.fill", Tint.orange)
         case .scanning:
-            return (String(localized: "Scanning"), "sparkles", Tint.blue)
+            return (String(localized: "Scanning"), "sparkles", Tint.green)
         case .completed:
             return appState.totalJunkSize > 0
-                ? (String(localized: "Review ready"), "list.bullet.clipboard.fill", Tint.orange)
+                ? (String(localized: "Review ready"), "list.bullet.clipboard.fill", Tint.green)
                 : (String(localized: "All clear"), "checkmark.seal.fill", Tint.green)
         case .cleaning:
             return (String(localized: "Cleaning"), "wand.and.stars", Tint.orange)
