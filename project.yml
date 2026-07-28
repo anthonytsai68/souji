@@ -1,10 +1,10 @@
-name: PureMac
+name: Souji
 packages:
   Sparkle:
     url: https://github.com/sparkle-project/Sparkle
     from: 2.0.0
 options:
-  bundleIdPrefix: com.puremac
+  bundleIdPrefix: com.souji
   deploymentTarget:
     macOS: "13.0"
   xcodeVersion: "16.4"
@@ -19,28 +19,28 @@ settings:
     ONLY_ACTIVE_ARCH: "NO"
     CODE_SIGN_IDENTITY: "Apple Development"
     CODE_SIGN_STYLE: "Automatic"
-    DEVELOPMENT_TEAM: "H3WXHVTP97"
-    CODE_SIGN_ENTITLEMENTS: "PureMac/PureMac.entitlements"
-    INFOPLIST_FILE: "PureMac/Info.plist"
-    PRODUCT_BUNDLE_IDENTIFIER: "com.puremac.app"
-    MARKETING_VERSION: "2.9.3"
-    CURRENT_PROJECT_VERSION: "24"
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_ENTITLEMENTS: "Souji/Souji.entitlements"
+    INFOPLIST_FILE: "Souji/Info.plist"
+    PRODUCT_BUNDLE_IDENTIFIER: "com.souji.app"
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
     GENERATE_INFOPLIST_FILE: "NO"
     ASSETCATALOG_COMPILER_APPICON_NAME: "AppIcon"
     COMBINE_HIDPI_IMAGES: "YES"
 
 targets:
-  PureMac:
+  Souji:
     type: application
     platform: macOS
     sources:
-      - PureMac
+      - Souji
     dependencies:
       - package: Sparkle
         product: Sparkle
     settings:
       base:
-        PRODUCT_NAME: PureMac
+        PRODUCT_NAME: Souji
         SWIFT_EMIT_LOC_STRINGS: "YES"
         LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/../Frameworks"
       configs:
@@ -48,24 +48,24 @@ targets:
           CODE_SIGNING_ALLOWED: "NO"
           CODE_SIGNING_REQUIRED: "NO"
 
-  PureMacTests:
+  SoujiTests:
     type: bundle.unit-test
     platform: macOS
     sources:
-      - PureMacTests
+      - SoujiTests
     dependencies:
-      - target: PureMac
+      - target: Souji
     settings:
       base:
         CODE_SIGNING_ALLOWED: "NO"
         CODE_SIGNING_REQUIRED: "NO"
 
 schemes:
-  PureMac:
+  Souji:
     build:
       targets:
-        PureMac: all
-        PureMacTests: [test]
+        Souji: all
+        SoujiTests: [test]
     test:
       targets:
-        - name: PureMacTests
+        - name: SoujiTests

@@ -20,11 +20,11 @@ permissions:
   contents: write
 
 env:
-  APP_NAME: PureMac
+  APP_NAME: Souji
   BUNDLE_ID: com.puremac.app
   TEAM_ID: H3WXHVTP97
-  SCHEME: PureMac
-  PROJECT: PureMac.xcodeproj
+  SCHEME: Souji
+  PROJECT: Souji.xcodeproj
   CONFIGURATION: Release
 
 jobs:
@@ -96,7 +96,7 @@ jobs:
             -scheme "${SCHEME}" \
             -configuration "${CONFIGURATION}" \
             -destination 'generic/platform=macOS' \
-            -archivePath build/PureMac.xcarchive \
+            -archivePath build/Souji.xcarchive \
             ARCHS="arm64 x86_64" \
             ONLY_ACTIVE_ARCH=NO \
             CODE_SIGN_STYLE=Manual \
@@ -121,37 +121,37 @@ jobs:
           </plist>
           PLIST
           xcodebuild -exportArchive \
-            -archivePath build/PureMac.xcarchive \
+            -archivePath build/Souji.xcarchive \
             -exportPath build/export \
             -exportOptionsPlist build/ExportOptions.plist | xcbeautify
 
       - name: Verify codesign + hardened runtime
         run: |
           set -euo pipefail
-          APP="build/export/PureMac.app"
+          APP="build/export/Souji.app"
           codesign --verify --deep --strict --verbose=2 "${APP}"
           codesign -dvv "${APP}" 2>&1 | tee /tmp/cs-info.txt
           grep -q "flags=0x10000(runtime)" /tmp/cs-info.txt || { echo "::error::Hardened runtime missing"; exit 1; }
           spctl --assess --type execute --verbose=4 "${APP}" || true
           # Universal arch check
-          lipo -archs "${APP}/Contents/MacOS/PureMac" | grep -q "x86_64" && lipo -archs "${APP}/Contents/MacOS/PureMac" | grep -q "arm64"
+          lipo -archs "${APP}/Contents/MacOS/Souji" | grep -q "x86_64" && lipo -archs "${APP}/Contents/MacOS/Souji" | grep -q "arm64"
 
       - name: Build DMG
         env:
           VERSION: ${{ steps.ver.outputs.version }}
         run: |
           set -euo pipefail
-          DMG="build/PureMac-${VERSION}.dmg"
+          DMG="build/Souji-${VERSION}.dmg"
           create-dmg \
-            --volname "PureMac ${VERSION}" \
+            --volname "Souji ${VERSION}" \
             --window-size 540 360 \
             --icon-size 100 \
-            --icon "PureMac.app" 140 180 \
-            --hide-extension "PureMac.app" \
+            --icon "Souji.app" 140 180 \
+            --hide-extension "Souji.app" \
             --app-drop-link 400 180 \
             --no-internet-enable \
             "${DMG}" \
-            build/export/PureMac.app
+            build/export/Souji.app
           codesign --sign "Developer ID Application: Moamen Basel (H3WXHVTP97)" --timestamp "${DMG}"
           codesign --verify --verbose=2 "${DMG}"
 
@@ -172,7 +172,7 @@ jobs:
           VERSION: ${{ steps.ver.outputs.version }}
         run: |
           set -euo pipefail
-          DMG="build/PureMac-${VERSION}.dmg"
+          DMG="build/Souji-${VERSION}.dmg"
           xcrun notarytool submit "${DMG}" \
             --key "${ASC_KEY_PATH}" \
             --key-id "${ASC_KEY_ID}" \
@@ -190,17 +190,17 @@ jobs:
           VERSION: ${{ steps.ver.outputs.version }}
         run: |
           set -euo pipefail
-          ZIP="build/PureMac-${VERSION}.zip"
+          ZIP="build/Souji-${VERSION}.zip"
           # Notarize the .app inside a zip too (homebrew cask uses zip)
-          ditto -c -k --keepParent --sequesterRsrc build/export/PureMac.app build/PureMac-app.zip
-          xcrun notarytool submit build/PureMac-app.zip \
+          ditto -c -k --keepParent --sequesterRsrc build/export/Souji.app build/Souji-app.zip
+          xcrun notarytool submit build/Souji-app.zip \
             --key "${ASC_KEY_PATH}" \
             --key-id "${ASC_KEY_ID}" \
             --issuer "${ASC_ISSUER_ID}" \
             --wait --timeout 30m
-          xcrun stapler staple build/export/PureMac.app
+          xcrun stapler staple build/export/Souji.app
           # Final shippable zip with stapled ticket
-          ditto -c -k --keepParent --sequesterRsrc build/export/PureMac.app "${ZIP}"
+          ditto -c -k --keepParent --sequesterRsrc build/export/Souji.app "${ZIP}"
 
       - name: Compute SHA256 checksums
         id: sha
@@ -208,8 +208,8 @@ jobs:
           VERSION: ${{ steps.ver.outputs.version }}
         run: |
           set -euo pipefail
-          DMG_SHA=$(shasum -a 256 "build/PureMac-${VERSION}.dmg" | awk '{print $1}')
-          ZIP_SHA=$(shasum -a 256 "build/PureMac-${VERSION}.zip" | awk '{print $1}')
+          DMG_SHA=$(shasum -a 256 "build/Souji-${VERSION}.dmg" | awk '{print $1}')
+          ZIP_SHA=$(shasum -a 256 "build/Souji-${VERSION}.zip" | awk '{print $1}')
           echo "dmg=${DMG_SHA}" >> "$GITHUB_OUTPUT"
           echo "zip=${ZIP_SHA}" >> "$GITHUB_OUTPUT"
           {
@@ -217,8 +217,8 @@ jobs:
             echo ""
             echo "| Asset | SHA-256 |"
             echo "|-------|---------|"
-            echo "| PureMac-${VERSION}.dmg | \`${DMG_SHA}\` |"
-            echo "| PureMac-${VERSION}.zip | \`${ZIP_SHA}\` |"
+            echo "| Souji-${VERSION}.dmg | \`${DMG_SHA}\` |"
+            echo "| Souji-${VERSION}.zip | \`${ZIP_SHA}\` |"
           } > build/CHECKSUMS.md
 
       - name: Upload artifacts (always, for inspection)
@@ -226,8 +226,8 @@ jobs:
         with:
           name: puremac-${{ steps.ver.outputs.version }}
           path: |
-            build/PureMac-${{ steps.ver.outputs.version }}.dmg
-            build/PureMac-${{ steps.ver.outputs.version }}.zip
+            build/Souji-${{ steps.ver.outputs.version }}.dmg
+            build/Souji-${{ steps.ver.outputs.version }}.zip
             build/CHECKSUMS.md
           retention-days: 14
 
@@ -241,7 +241,7 @@ jobs:
           set -euo pipefail
           NOTES_FILE=build/release-notes.md
           {
-            echo "## PureMac ${VERSION}"
+            echo "## Souji ${VERSION}"
             echo ""
             echo "Universal binary (Intel + Apple Silicon). Signed with Developer ID + notarized + stapled by Apple."
             echo ""
@@ -257,14 +257,14 @@ jobs:
 
           if gh release view "${TAG}" --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
             gh release upload "${TAG}" \
-              "build/PureMac-${VERSION}.dmg" \
-              "build/PureMac-${VERSION}.zip" \
+              "build/Souji-${VERSION}.dmg" \
+              "build/Souji-${VERSION}.zip" \
               --repo "${GITHUB_REPOSITORY}" --clobber
           else
             gh release create "${TAG}" \
-              "build/PureMac-${VERSION}.dmg" \
-              "build/PureMac-${VERSION}.zip" \
-              --title "PureMac ${TAG}" \
+              "build/Souji-${VERSION}.dmg" \
+              "build/Souji-${VERSION}.zip" \
+              --title "Souji ${TAG}" \
               --notes-file "${NOTES_FILE}" \
               --repo "${GITHUB_REPOSITORY}"
           fi

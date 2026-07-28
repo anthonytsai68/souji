@@ -20,8 +20,8 @@ jobs:
 
       - name: Build (Universal Binary)
         run: |
-          xcodebuild -project PureMac.xcodeproj \
-            -scheme PureMac \
+          xcodebuild -project Souji.xcodeproj \
+            -scheme Souji \
             -configuration Release \
             -derivedDataPath build \
             build \
