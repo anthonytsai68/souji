@@ -113,7 +113,7 @@ struct GeneralSettingsView: View {
             set: { newValue in
                 menuBarMonitor = newValue
                 // Tell AppDelegate to add/remove the status item without relaunch.
-                NotificationCenter.default.post(name: .pureMacMenuBarMonitorChanged, object: nil)
+                NotificationCenter.default.post(name: .soujiMenuBarMonitorChanged, object: nil)
             }
         )
     }

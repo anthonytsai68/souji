@@ -22,7 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             syncMenuBarMonitor()
             NotificationCenter.default.addObserver(
                 self, selector: #selector(syncMenuBarMonitor),
-                name: .pureMacMenuBarMonitorChanged, object: nil
+                name: .soujiMenuBarMonitorChanged, object: nil
             )
         }
         // Touch TCC-protected paths so macOS registers Souji in the
@@ -52,7 +52,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // and NotificationCenter does not replay); AppState drains it in init.
         ExternalUninstallBuffer.pendingPath = appURL.path
         NotificationCenter.default.post(
-            name: .pureMacExternalUninstall,
+            name: .soujiExternalUninstall,
             object: nil,
             userInfo: ["path": appURL.path]
         )

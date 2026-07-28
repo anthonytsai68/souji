@@ -14,7 +14,7 @@ enum AppSection: Hashable {
 extension Notification.Name {
     /// Posted by the Finder Services handler ("Uninstall with Souji") with a
     /// `["path": String]` userInfo pointing at the right-clicked .app bundle.
-    static let pureMacExternalUninstall = Notification.Name("Souji.ExternalUninstall")
+    static let soujiExternalUninstall = Notification.Name("Souji.ExternalUninstall")
 }
 
 /// Cold-launch buffer for Finder Services. A "Uninstall with Souji" request
@@ -151,7 +151,7 @@ final class AppState: ObservableObject {
         // Listen for right-click "Uninstall with Souji" hand-offs from the
         // Finder Services handler in AppDelegate.
         externalUninstallObserver = NotificationCenter.default
-            .publisher(for: .pureMacExternalUninstall)
+            .publisher(for: .soujiExternalUninstall)
             .receive(on: RunLoop.main)
             .sink { [weak self] note in
                 let path = (note.userInfo?["path"] as? String) ?? ExternalUninstallBuffer.pendingPath
