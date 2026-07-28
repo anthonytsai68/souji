@@ -43,12 +43,12 @@ final class ThemeManager: ObservableObject {
     }
 }
 
-/// Centralized accent palette. One blue, one green for success, one orange
-/// for warning, one red for destructive. Other tints exist for categorical
-/// differentiation but the surface chrome only uses these four.
+/// Centralized accent palette. One green as primary, one blue for info,
+/// one orange for warning, one red for destructive. Other tints exist
+/// for categorical differentiation but the surface chrome only uses these.
 enum Tint {
+    static let green  = Color(red: 0.02, green: 0.59, blue: 0.40)  // #059669
     static let blue   = Color(red: 0.04, green: 0.52, blue: 1.00)
-    static let green  = Color(red: 0.18, green: 0.78, blue: 0.47)
     static let orange = Color(red: 1.00, green: 0.58, blue: 0.04)
     static let purple = Color(red: 0.55, green: 0.32, blue: 0.87)
     static let pink   = Color(red: 1.00, green: 0.30, blue: 0.50)
@@ -70,16 +70,16 @@ enum MotionTokens {
 /// CTAs and focal chrome — secondary surfaces stay flat.
 enum TintGradient {
     static let accent = LinearGradient(
-        colors: [Tint.blue, Tint.purple],
+        colors: [Tint.green, Tint.green.opacity(0.75)],
         startPoint: .topLeading, endPoint: .bottomTrailing
     )
     /// Immersive Smart Care backdrop. Kept separate from `accent` so primary
     /// controls stay bright while the dashboard can use a deeper scenic plane.
     static let smartCare = LinearGradient(
         colors: [
-            Color(red: 0.025, green: 0.031, blue: 0.047),
-            Color(red: 0.035, green: 0.051, blue: 0.086),
-            Color(red: 0.018, green: 0.071, blue: 0.108)
+            Color(red: 0.020, green: 0.035, blue: 0.025),
+            Color(red: 0.022, green: 0.055, blue: 0.038),
+            Color(red: 0.015, green: 0.048, blue: 0.030)
         ],
         startPoint: .topLeading,
         endPoint: .bottomTrailing
@@ -101,7 +101,7 @@ enum TintGradient {
 /// spots (category heroes, result rows) so the chrome stays matte elsewhere.
 struct IconTile: View {
     let systemName: String
-    var tint: Color = Tint.blue
+    var tint: Color = Tint.green
     var size: CGFloat = 26
     var corner: CGFloat = 7
     var glow: Bool = false
@@ -151,15 +151,15 @@ struct AmbientBackdrop: View {
         ZStack {
             Color(nsColor: .windowBackgroundColor)
             RadialGradient(
-                colors: [Tint.blue.opacity(0.10 * strength), .clear],
+                colors: [Tint.green.opacity(0.10 * strength), .clear],
                 center: .topLeading, startRadius: 0, endRadius: 700
             )
             RadialGradient(
-                colors: [Tint.purple.opacity(0.08 * strength), .clear],
+                colors: [Tint.cyan.opacity(0.07 * strength), .clear],
                 center: .topTrailing, startRadius: 0, endRadius: 620
             )
             RadialGradient(
-                colors: [Tint.pink.opacity(0.05 * strength), .clear],
+                colors: [Tint.blue.opacity(0.04 * strength), .clear],
                 center: UnitPoint(x: 0.5, y: -0.15), startRadius: 0, endRadius: 480
             )
         }
