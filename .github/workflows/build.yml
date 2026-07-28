@@ -31,13 +31,15 @@ jobs:
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO
 
-      - name: Package .app
+      - name: Package DMG
         run: |
-          cd build/Build/Products/Release
-          zip -r ../../../../Souji.zip Souji.app
+          APP_DIR="build/Build/Products/Release"
+          mkdir -p dist
+          cp -R "$APP_DIR/Souji.app" dist/
+          hdiutil create -volname Souji -srcfolder dist -ov -format UDZO Souji.dmg
 
-      - name: Upload artifact
+      - name: Upload DMG artifact
         uses: actions/upload-artifact@v4
         with:
           name: Souji
-          path: Souji.zip
+          path: Souji.dmg
