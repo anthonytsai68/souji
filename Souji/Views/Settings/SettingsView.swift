@@ -365,17 +365,7 @@ struct AboutSettingsView: View {
                     .foregroundStyle(.secondary)
                 HStack(spacing: 16) {
                     Link(destination: URL(string: "https://www.paypal.com/ncp/payment/LCPQVCA6EP69W")!) {
-                        Label("PayPal", systemImage: "heart.fill")
-                            .foregroundStyle(.white)
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 10)
-                            .background(Color(red: 0.02, green: 0.59, blue: 0.40))
-                            .clipShape(Capsule())
-                    }
-                    .buttonStyle(.plain)
-
-                    Link(destination: URL(string: "https://buymeacoffee.com/admin")!) {
-                        Label("Buy Me a Coffee", systemImage: "cup.and.saucer.fill")
+                        Label("Buy me a coffee ($9)", systemImage: "cup.and.saucer.fill")
                             .foregroundStyle(.white)
                             .padding(.horizontal, 20)
                             .padding(.vertical, 10)
