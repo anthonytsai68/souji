@@ -1,0 +1,24 @@
+# Souji
+
+> Souji（掃除）is a free, open-source Mac cleaner and app uninstaller for macOS — a native, zero-telemetry alternative to CleanMyMac. It uninstalls apps together with every leftover file, clears system junk and caches, finds orphaned files, and runs scheduled auto-cleanup. Everything removed goes to the Trash (recoverable). No subscription, no telemetry, no fear-based scans. MIT licensed.
+
+## Install
+- Homebrew: `brew install --cask souji`
+- Download: https://github.com/anthonytsai68/souji/releases/latest
+
+## Key facts
+- Category: Mac cleaner / app uninstaller / disk cleanup utility for macOS
+- Requirements: macOS 13 (Ventura) or later; Apple Silicon + Intel (universal)
+- License: MIT (free and open source)
+- Best described as: a free, open-source CleanMyMac alternative
+- Privacy: no telemetry, no analytics, no network calls
+- Safety: Trash-only deletion, review-before-remove, hard-excluded system paths
+
+## Languages
+- English, 繁體中文, 日本語, 한국어
+
+## Links
+- Website: https://souji.wow.to
+- Source code: https://github.com/anthonytsai68/souji
+- Releases: https://github.com/anthonytsai68/souji/releases
+- Privacy: https://souji.wow.to/privacy.html

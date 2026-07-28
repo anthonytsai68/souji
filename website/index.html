@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Souji — Free Open-Source Mac Cleaner &amp; App Uninstaller (CleanMyMac Alternative)</title>
+<meta name="description" content="Souji（掃除）is a free, open-source Mac cleaner and app uninstaller for macOS. Remove apps with every leftover, clear caches and junk, find orphaned files. Zero telemetry, MIT licensed. Available in English, 繁體中文, 日本語, 한국어.">
+<meta name="keywords" content="mac cleaner, free mac cleaner, CleanMyMac alternative, app uninstaller mac, open source mac cleaner, Souji, mac junk cleaner, mac cache cleaner, disk cleanup mac, macOS cleaner, mac 清理, Mac 掃除, Macクリーナー, Mac 청소">
+<meta name="author" content="wow.to">
+<meta name="theme-color" content="#059669">
+
+<link rel="canonical" href="https://souji.wow.to/">
+<link rel="alternate" hreflang="en" href="https://souji.wow.to/">
+<link rel="alternate" hreflang="ja" href="https://souji.wow.to/?lang=ja">
+<link rel="alternate" hreflang="zh-Hant" href="https://souji.wow.to/?lang=zh-Hant">
+<link rel="alternate" hreflang="ko" href="https://souji.wow.to/?lang=ko">
+<link rel="alternate" hreflang="x-default" href="https://souji.wow.to/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧹</text></svg>">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Souji">
+<meta property="og:title" content="Souji — Free Open-Source Mac Cleaner &amp; App Uninstaller">
+<meta property="og:description" content="A free, open-source CleanMyMac alternative: uninstall apps with every leftover, clear junk and caches, find orphaned files. Zero telemetry. MIT.">
+<meta property="og:url" content="https://souji.wow.to/">
+<meta property="og:image" content="https://souji.wow.to/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Souji — Free Open-Source Mac Cleaner &amp; App Uninstaller">
+<meta name="twitter:description" content="A free, native, open-source CleanMyMac alternative. Uninstall cleanly, clear junk, find orphans. No telemetry, no subscription.">
+
+<!-- Schema.org SoftwareApplication -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"SoftwareApplication",
+  "name":"Souji",
+  "alternateName":"Souji Cleaner",
+  "description":"Souji（掃除）is a free, open-source Mac cleaner and app uninstaller for macOS — uninstall apps with every leftover file, clear caches and system junk, find orphaned files. No subscription, no telemetry, no fear-based scans. Available in 4 languages.",
+  "applicationCategory":"UtilitiesApplication",
+  "operatingSystem":"macOS 13.0 or later",
+  "downloadUrl":"https://github.com/anthonytsai68/souji/releases/latest",
+  "url":"https://souji.wow.to/",
+  "license":"https://opensource.org/licenses/MIT",
+  "author":{"@type":"Organization","name":"wow.to"},
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+}
+</script>
+<!-- Schema.org FAQPage -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"Is Souji free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Souji is completely free and open source under the MIT license on GitHub. There is no subscription, no trial, and no paywalled features."}},
+    {"@type":"Question","name":"Is Souji a good CleanMyMac alternative?","acceptedAnswer":{"@type":"Answer","text":"Yes. Souji does what people actually use CleanMyMac for — app uninstaller with every leftover, junk and cache cleanup, orphaned file detection — as a free, open-source, native app with no telemetry and no fear-based scans."}},
+    {"@type":"Question","name":"Does Souji collect any data?","acceptedAnswer":{"@type":"Answer","text":"No. Souji has no telemetry, no analytics, no crash reporting, and makes no network calls. It does not require a network connection to work."}},
+    {"@type":"Question","name":"Does Souji delete files safely?","acceptedAnswer":{"@type":"Answer","text":"Everything Souji removes goes to the Trash via the system API. Anything removed by mistake can be dragged back. You review every item before removal, and high-risk system paths are hard-excluded."}},
+    {"@type":"Question","name":"How do I install Souji?","acceptedAnswer":{"@type":"Answer","text":"Run: brew install --cask souji — or download the DMG from GitHub releases. Requires macOS 13 (Ventura) or later. Universal binary for Apple Silicon and Intel."}},
+    {"@type":"Question","name":"What languages does Souji support?","acceptedAnswer":{"@type":"Answer","text":"English, Traditional Chinese (繁體中文), Japanese (日本語), and Korean (한국어). The language can be switched in Settings."}}
+  ]
+}
+</script>
+<style>
+/* ── Reset & Base ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0f0f15; --bg2:#191923; --card:#1e1e2a;
+  --fg:#f0f0f5; --muted:#8b8ba3; --accent:#059669; --accent-hover:#047857;
+  --border:#2a2a3a; --radius:14px; --blue:#0ea5e9;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none;transition:color .2s}
+a:hover{color:var(--accent-hover)}
+img{max-width:100%;height:auto}
+.wrap{max-width:1024px;margin:0 auto;padding:0 24px}
+
+/* ── Language Switcher ── */
+.lang-bar{display:flex;justify-content:flex-end;gap:6px;padding:16px 24px 0}
+.lang-btn{background:transparent;border:1px solid var(--border);color:var(--muted);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-family:var(--font);transition:all .2s}
+.lang-btn:hover{border-color:var(--accent);color:var(--fg)}
+.lang-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.lang-content{display:none}
+.lang-content.active{display:block}
+
+/* ── Hero ── */
+.hero{text-align:center;padding:64px 0 48px}
+.hero-icon{font-size:72px;line-height:1;margin-bottom:16px;display:block}
+.hero h1{font-size:48px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+.hero .tagline{font-size:20px;color:var(--muted);max-width:600px;margin:0 auto 32px}
+.hero-meta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;font-size:14px;color:var(--muted)}
+.hero-meta span{display:flex;align-items:center;gap:5px}
+.cta-group{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:var(--radius);font-weight:600;font-size:16px;cursor:pointer;border:none;font-family:var(--font);transition:all .2s}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent-hover);transform:translateY(-1px)}
+.btn-secondary{background:var(--card);color:var(--fg);border:1px solid var(--border)}
+.btn-secondary:hover{border-color:var(--accent)}
+.btn-ghost{background:transparent;color:var(--muted);padding:14px 16px}
+.btn-ghost:hover{color:var(--fg)}
+
+/* ── Sections ── */
+section{padding:72px 0}
+.section-title{font-size:32px;font-weight:700;text-align:center;margin-bottom:8px}
+.section-sub{color:var(--muted);text-align:center;margin-bottom:48px;font-size:16px}
+
+/* ── Features Grid ── */
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.feat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:border-color .2s}
+.feat:hover{border-color:var(--accent)}
+.feat-icon{font-size:32px;margin-bottom:12px}
+.feat h3{font-size:18px;font-weight:600;margin-bottom:8px}
+.feat p{color:var(--muted);font-size:14px;line-height:1.7}
+
+/* ── Screenshot ── */
+.shot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.shot{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px}
+.shot-placeholder{display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px;text-align:center}
+
+/* ── Install Steps ── */
+.install-steps{max-width:640px;margin:0 auto}
+.install-step{display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--border)}
+.install-step:last-child{border-bottom:none}
+.step-num{background:var(--accent);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.step-text{font-size:15px}
+.step-text code{background:var(--bg2);padding:3px 8px;border-radius:6px;font-size:14px;color:var(--blue)}
+
+/* ── wow.to Promo ── */
+.promo{background:linear-gradient(135deg,var(--bg2),#0a1a1e);border:2px solid var(--accent);border-radius:var(--radius);padding:48px;text-align:center;margin:48px 0}
+.promo h2{font-size:28px;font-weight:700;margin-bottom:12px}
+.promo p{color:var(--muted);font-size:16px;max-width:540px;margin:0 auto 24px}
+.promo .btn{background:var(--blue);color:#fff}
+.promo .btn:hover{background:#0284c7}
+
+/* ── FAQ ── */
+.faq{max-width:720px;margin:0 auto}
+details{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;overflow:hidden}
+details summary{padding:18px 22px;cursor:pointer;font-weight:600;font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details summary::-webkit-details-marker{display:none}
+details summary:after{content:'+';font-size:20px;color:var(--muted);transition:transform .2s}
+details[open] summary:after{content:'−'}
+details[open]{border-color:var(--accent)}
+details .faq-answer{padding:0 22px 18px;color:var(--muted);font-size:14px;line-height:1.7}
+
+/* ── Promise ── */
+.promise-list{max-width:720px;margin:0 auto}
+.promise-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)}
+.promise-item:last-child{border-bottom:none}
+.promise-check{color:var(--accent);font-weight:700;font-size:18px;flex-shrink:0}
+
+/* ── Footer ── */
+footer{border-top:1px solid var(--border);padding:40px 0;text-align:center;color:var(--muted);font-size:13px}
+footer a{color:var(--muted)}
+footer a:hover{color:var(--fg)}
+footer .footer-links{display:flex;justify-content:center;gap:20px;margin-bottom:12px;flex-wrap:wrap}
+
+/* ── Responsive ── */
+@media(max-width:600px){
+  .hero h1{font-size:32px}
+  .hero .tagline{font-size:16px}
+  .section-title{font-size:26px}
+  .promo{padding:28px 20px}
+  .promo h2{font-size:22px}
+  .features{grid-template-columns:1fr}
+  .lang-bar{justify-content:center;padding:12px 16px 0}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ Language Switcher ═══ -->
+<div class="lang-bar">
+  <button class="lang-btn active" data-lang="en" onclick="switchLang('en')">English</button>
+  <button class="lang-btn" data-lang="zh-Hant" onclick="switchLang('zh-Hant')">繁體中文</button>
+  <button class="lang-btn" data-lang="ja" onclick="switchLang('ja')">日本語</button>
+  <button class="lang-btn" data-lang="ko" onclick="switchLang('ko')">한국어</button>
+</div>
+
+<!-- ═══ English ═══ -->
+<div id="lang-en" class="lang-content active">
+
+<div class="wrap hero">
+  <span class="hero-icon">🧹</span>
+  <h1>Souji</h1>
+  <p class="tagline">Reclaim your Mac. A free, open-source Mac cleaner &amp; app uninstaller. No subscription, no telemetry, no fear tactics.</p>
+  <div class="hero-meta">
+    <span>🔓 Free &amp; Open Source</span>
+    <span>🛡️ No Telemetry</span>
+    <span>🍎 macOS 13+</span>
+    <span>💎 Apple Silicon + Intel</span>
+  </div>
+  <div class="cta-group">
+    <a href="https://github.com/anthonytsai68/souji/releases/latest" class="btn btn-primary">📥 Download Souji</a>
+    <a href="#install" class="btn btn-secondary">🍺 Homebrew Install</a>
+    <a href="https://github.com/anthonytsai68/souji" class="btn btn-ghost">GitHub ↗</a>
+  </div>
+</div>
+
+<section id="features">
+<div class="wrap">
+  <h2 class="section-title">What Souji Does</h2>
+  <p class="section-sub">Everything goes to Trash. Everything is recoverable. Nothing is deleted without your review.</p>
+  <div class="features">
+    <div class="feat">
+      <div class="feat-icon">🗑️</div>
+      <h3>App Uninstaller</h3>
+      <p>Removes an app together with every preference plist, cache, container, launch agent, and log it left behind. 10-level matching engine for thorough cleanup.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">🔍</div>
+      <h3>Orphan Finder</h3>
+      <p>Finds files left behind by apps that no longer exist. Filter by installed apps, with persistent ignore list for false positives.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">⚡</div>
+      <h3>Smart Cleaner</h3>
+      <p>System junk, user caches, Xcode DerivedData, Homebrew, npm/yarn/pnpm, Docker, mail attachments, large &amp; old files — all scanned in parallel.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">🕐</div>
+      <h3>Scheduled Cleaning</h3>
+      <p>Optional auto-clean on a configurable interval (hourly to monthly). Only runs when there's something meaningful to remove.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">🛡️</div>
+      <h3>Privacy First</h3>
+      <p>Zero telemetry. No analytics, no crash reporting, no network calls. The app doesn't even know you exist.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">🌐</div>
+      <h3>4 Languages</h3>
+      <p>English, 繁體中文, 日本語, 한국어. Switch anytime in Settings — no restart needed beyond a quick relaunch.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ wow.to PROMO ═══ -->
+<section>
+<div class="wrap">
+  <div class="promo">
+    <h2>✂️ Shared by Souji, shortened by <strong>wow.to</strong></h2>
+    <p>Every Souji user knows the value of clean and simple. That's why we built <strong>wow.to</strong> — a URL shortener that's fast, custom, and permanent. Share your links the same way Souji keeps your Mac: clean, simple, and under your control.</p>
+    <a href="https://wow.to" class="btn">✨ Try wow.to — Short Links, Infinite Control →</a>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+  <h2 class="section-title">Screenshots</h2>
+  <p class="section-sub">Coming soon — real screenshots of Souji in action.</p>
+  <div class="shot-grid">
+    <div class="shot"><div class="shot-placeholder">📸 Smart Care Dashboard</div></div>
+    <div class="shot"><div class="shot-placeholder">📸 App Uninstaller</div></div>
+    <div class="shot"><div class="shot-placeholder">📸 Scan in Progress</div></div>
+  </div>
+</div>
+</section>
+
+<section id="install">
+<div class="wrap">
+  <h2 class="section-title">Install Souji</h2>
+  <p class="section-sub">Two ways to get started. macOS 13 (Ventura) or later required.</p>
+  <div class="install-steps">
+    <div class="install-step">
+      <div class="step-num">1</div>
+      <div class="step-text"><strong>Homebrew (recommended):</strong><br>Run <code>brew install --cask souji</code> in your terminal, then open Souji from your Applications folder.</div>
+    </div>
+    <div class="install-step">
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>Manual download:</strong><br>Grab the latest <code>.dmg</code> from <a href="https://github.com/anthonytsai68/souji/releases/latest">GitHub Releases</a>, mount it, and drag Souji into <code>/Applications</code>.</div>
+    </div>
+    <div class="install-step">
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>Grant Full Disk Access:</strong><br>Souji guides you through granting FDA on first launch. Without it, cleanup is limited — with it, Souji finds 70% more junk and uninstalls apps completely.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+  <h2 class="section-title">Our Promise</h2>
+  <p class="section-sub">A Mac cleaner asks for the deepest permission macOS grants. Here's what we commit to.</p>
+  <div class="promise-list">
+    <div class="promise-item"><span class="promise-check">✓</span><span><strong>Trash, never rm.</strong> Everything goes to the Trash via FileManager.trashItem. If it was wrong, drag it back.</span></div>
+    <div class="promise-item"><span class="promise-check">✓</span><span><strong>No telemetry, ever.</strong> No analytics, no crash reporting, no network calls. The app doesn't know you exist.</span></div>
+    <div class="promise-item"><span class="promise-check">✓</span><span><strong>No fake urgency.</strong> No dramatized "47 GB of junk detected!" badges, no red alarm counters, no "your Mac is at risk."</span></div>
+    <div class="promise-item"><span class="promise-check">✓</span><span><strong>You review before removal.</strong> Every item shows its real path. Nothing is auto-deleted.</span></div>
+    <div class="promise-item"><span class="promise-check">✓</span><span><strong>Open source MIT.</strong> Read every line at <a href="https://github.com/anthonytsai68/souji">github.com/anthonytsai68/souji</a>. Fork it, ship your own.</span></div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+  <h2 class="section-title">Frequently Asked Questions</h2>
+  <div class="faq">
+    <details><summary>Is Souji really free?</summary><div class="faq-answer">Yes. Souji is completely free and open source under the MIT license. There is no subscription, no trial, and no paywalled features — ever.</div></details>
+    <details><summary>How is this different from CleanMyMac?</summary><div class="faq-answer">CleanMyMac costs $40+/year, is closed-source, and ships telemetry. Souji is free, MIT-licensed, open source, and has zero telemetry. The cleaning quality is comparable — Souji uses the same system APIs — but Souji is honest about purgeable space and never uses fear-based scans.</div></details>
+    <details><summary>Does Souji collect any data?</summary><div class="faq-answer">No. Souji has no telemetry, no analytics, no crash reporting, and makes no network connections. It works entirely offline.</div></details>
+    <details><summary>Is it safe?</summary><div class="faq-answer">Everything goes to the Trash via system APIs. You review every item before removal. High-risk system paths are hard-excluded in code. Symlink attacks are prevented by path re-resolution. The code is MIT — you can read every line.</div></details>
+    <details><summary>What languages are supported?</summary><div class="faq-answer">English, Traditional Chinese (繁體中文), Japanese (日本語), and Korean (한국어). Switch in Settings → General → Language at any time.</div></details>
+    <details><summary>Can I build it from source?</summary><div class="faq-answer">Yes. <code>brew install xcodegen</code>, then clone, run <code>xcodegen generate</code>, and build with Xcode. See the GitHub README for exact commands.</div></details>
+  </div>
+</div>
+</section>
+
+</div><!-- /lang-en -->
+
+<!-- ═══ 繁體中文 ═══ -->
+<div id="lang-zh-Hant" class="lang-content">
+
+<div class="wrap hero">
+  <span class="hero-icon">🧹</span>
+  <h1>Souji 掃除</h1>
+  <p class="tagline">還原你的 Mac。免費開源的 Mac 清理工具與 App 移除器。無需訂閱、無追蹤、不恐嚇。</p>
+  <div class="hero-meta">
+    <span>🔓 免費開源</span>
+    <span>🛡️ 零追蹤</span>
+    <span>🍎 macOS 13+</span>
+    <span>💎 Apple Silicon + Intel</span>
+  </div>
+  <div class="cta-group">
+    <a href="https://github.com/anthonytsai68/souji/releases/latest" class="btn btn-primary">📥 下載 Souji</a>
+    <a href="#install" class="btn btn-secondary">🍺 Homebrew 安裝</a>
+    <a href="https://github.com/anthonytsai68/souji" class="btn btn-ghost">GitHub ↗</a>
+  </div>
+</div>
+
+<section>
+<div class="wrap">
+  <h2 class="section-title">Souji 能做什麼</h2>
+  <p class="section-sub">所有刪除的檔案都進資源回收筒，都可以還原。刪除前你一定會看到清單。</p>
+  <div class="features">
+    <div class="feat"><div class="feat-icon">🗑️</div><h3>App 完整移除</h3><p>移除 App 時一併清除所有偏好設定、快取、容器、登入項目和日誌。10 層比對引擎確保清得乾淨。</p></div>
+    <div class="feat"><div class="feat-icon">🔍</div><h3>孤島檔案搜尋</h3><p>找出已被刪除的 App 遺留下來的檔案。可設定忽略清單避免誤判。</p></div>
+    <div class="feat"><div class="feat-icon">⚡</div><h3>智慧清理</h3><p>系統垃圾、使用者快取、Xcode DerivedData、Homebrew、npm/yarn/pnpm、Docker、郵件附件、大型檔案 — 全部平行掃描。</p></div>
+    <div class="feat"><div class="feat-icon">🕐</div><h3>定時清理</h3><p>可設定小時到月為間隔自動清理。只在有東西可清時才執行。</p></div>
+    <div class="feat"><div class="feat-icon">🛡️</div><h3>隱私優先</h3><p>零追蹤。無分析、無崩潰回報、無網路連線。App 甚至不知道你是誰。</p></div>
+    <div class="feat"><div class="feat-icon">🌐</div><h3>四國語言</h3><p>繁體中文、English、日本語、한국어。隨時在設定中切換。</p></div>
+  </div>
+</div>
+</section>
+
+<!-- wow.to PROMO (zh-Hant) -->
+<section>
+<div class="wrap">
+  <div class="promo">
+    <h2>✂️ 由 Souji 分享，由 <strong>wow.to</strong> 縮短</h2>
+    <p>每個 Souji 使用者都懂得簡潔的價值。所以我們建立了 <strong>wow.to</strong> — 一個快速、可自訂、永久有效的短網址服務。用 Souji 清理你的 Mac，用 wow.to 精簡你的連結。</p>
+    <a href="https://wow.to" class="btn">✨ 試試 wow.to →</a>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+  <h2 class="section-title">安裝 Souji</h2>
+  <p class="section-sub">兩種方式。需要 macOS 13（Ventura）以上。</p>
+  <div class="install-steps">
+    <div class="install-step"><div class="step-num">1</div><div class="step-text"><strong>Homebrew（推薦）：</strong><br>終端機執行 <code>brew install --cask souji</code>，然後從應用程式資料夾開啟 Souji。</div></div>
+    <div class="install-step"><div class="step-num">2</div><div class="step-text"><strong>手動下載：</strong><br>從 <a href="https://github.com/anthonytsai68/souji/releases/latest">GitHub Releases</a> 下載最新 <code>.dmg</code>，掛載後將 Souji 拖進 <code>/Applications</code>。</div></div>
+    <div class="install-step"><div class="step-num">3</div><div class="step-text"><strong>授予完整取用權限：</strong><br>首次啟動時 Souji 會引導你開啟「完整取用權限」。沒有它清理效果有限，有了它 Souji 能找出 70% 以上的垃圾並完整移除 App。</div></div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+  <h2 class="section-title">我們的承諾</h2>
+  <div class="promise-list">
+    <div class="promise-item"><span class="promise-check">✓</span><span><strong>進回收筒，不是直接刪除。</strong> 所有檔案透過系統 API 進回收筒。錯了就拉回來。</span></div>
+    <div class="promise-item"><span class="promise-check">✓</span><span><strong>零追蹤。</strong> 無分析、無崩潰回報、無網路連線。</span></div>
+    <div class="promise-item"><span class="promise-check">✓</span><span><strong>不製造恐慌。</strong> 沒有「發現 47GB 垃圾！」的紅字警報。</span></div>
+    <div class="promise-item"><span class="promise-check">✓</span><span><strong>刪除前你審閱。</strong> 每個項目都顯示真實路徑，不會自動刪除。</span></div>
+    <div class="promise-item"><span class="promise-check">✓</span><span><strong>MIT 開源。</strong> 原始碼在 <a href="https://github.com/anthonytsai68/souji">github.com/anthonytsai68/souji</a>，歡迎 fork。</span></div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+  <h2 class="section-title">常見問題</h2>
+  <div class="faq">
+    <details><summary>Souji 真的免費嗎？</summary><div class="faq-answer">是的。Souji 完全免費且 MIT 開源。沒有訂閱、沒有試用期、沒有付費功能。</div></details>
+    <details><summary>跟 CleanMyMac 有什麼不同？</summary><div class="faq-answer">CleanMyMac 每年 $40+ 美金、封閉原始碼、含追蹤。Souji 免費、MIT 開源、零追蹤。清理品質相當，但 Souji 不誇大功能、不恐嚇使用者。</div></details>
+    <details><summary>Souji 會收集資料嗎？</summary><div class="faq-answer">完全不會。無追蹤、無分析、無崩潰回報、無網路連線。離線即可使用。</div></details>
+    <details><summary>安全嗎？</summary><div class="faq-answer">所有刪除都進回收筒。刪除前你審閱每項。高風險系統路徑在程式碼中硬性排除。MIT 開源，每行程式碼都可查閱。</div></details>
+    <details><summary>支援哪些語言？</summary><div class="faq-answer">繁體中文、English、日本語、한국어。隨時在設定中切換。</div></details>
+  </div>
+</div>
+</section>
+
+</div><!-- /lang-zh-Hant -->
+
+<!-- ═══ 日本語 ═══ -->
+<div id="lang-ja" class="lang-content">
+
+<div class="wrap hero">
+  <span class="hero-icon">🧹</span>
+  <h1>Souji（掃除）</h1>
+  <p class="tagline">Mac を掃除する。無料・オープンソースの Mac クリーナー＆アンインストーラー。サブスクリプション不要、テレメトリなし、誇大広告なし。</p>
+  <div class="hero-meta">
+    <span>🔓 無料＆オープンソース</span>
+    <span>🛡️ テレメトリなし</span>
+    <span>🍎 macOS 13+</span>
+    <span>💎 Apple Silicon + Intel</span>
+  </div>
+  <div class="cta-group">
+    <a href="https://github.com/anthonytsai68/souji/releases/latest" class="btn btn-primary">📥 Souji をダウンロード</a>
+    <a href="#install" class="btn btn-secondary">🍺 Homebrew インストール</a>
+    <a href="https://github.com/anthonytsai68/souji" class="btn btn-ghost">GitHub ↗</a>
+  </div>
+</div>
+
+<section>
+<div class="wrap">
+  <h2 class="section-title">Souji の機能</h2>
+  <p class="section-sub">削除されたファイルはすべてゴミ箱へ。間違えても元に戻せます。削除前に確認できます。</p>
+  <div class="features">
+    <div class="feat"><div class="feat-icon">🗑️</div><h3>アプリアンインストーラー</h3><p>アプリと一緒に、設定 plist、キャッシュ、コンテナ、ログイン項目、ログファイルをすべて削除。10段階のマッチングエンジンで完全クリーニング。</p></div>
+    <div class="feat"><div class="feat-icon">🔍</div><h3>孤立ファイル検出</h3><p>既に削除されたアプリの残骸を発見。インストール済みアプリとの比較と、永続的な無視リストで誤検知を防止。</p></div>
+    <div class="feat"><div class="feat-icon">⚡</div><h3>スマートクリーナー</h3><p>システムジャンク、ユーザーキャッシュ、Xcode DerivedData、Homebrew、npm/yarn/pnpm、Docker、メール添付、大容量ファイル — 全て並列スキャン。</p></div>
+    <div class="feat"><div class="feat-icon">🕐</div><h3>定期クリーニング</h3><p>1時間から1ヶ月単位で自動クリーニングを設定可能。削除すべきものがある時だけ実行されます。</p></div>
+    <div class="feat"><div class="feat-icon">🛡️</div><h3>プライバシー第一</h3><p>テレメトリゼロ。分析、クラッシュレポート、ネットワーク通信は一切なし。</p></div>
+    <div class="feat"><div class="feat-icon">🌐</div><h3>4言語対応</h3><p>日本語、English、繁體中文、한국어。設定からいつでも切り替え可能。</p></div>
+  </div>
+</div>
+</section>
+
+<!-- wow.to PROMO (ja) -->
+<section>
+<div class="wrap">
+  <div class="promo">
+    <h2>✂️ Souji で共有、<strong>wow.to</strong> で短縮</h2>
+    <p>Souji ユーザーはシンプルの価値を知っています。だから <strong>wow.to</strong> を作りました — 高速で、カスタム可能で、永続的なURL短縮サービス。Souji が Mac をきれいに保つのと同じように、wow.to がリンクをすっきり管理します。</p>
+    <a href="https://wow.to" class="btn">✨ wow.to を試す →</a>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+  <h2 class="section-title">インストール方法</h2>
+  <p class="section-sub">2つの方法。macOS 13（Ventura）以降が必要です。</p>
+  <div class="install-steps">
+    <div class="install-step"><div class="step-num">1</div><div class="step-text"><strong>Homebrew（推奨）：</strong><br>ターミナルで <code>brew install --cask souji</code> を実行し、アプリケーションフォルダから Souji を開きます。</div></div>
+    <div class="install-step"><div class="step-num">2</div><div class="step-text"><strong>手動ダウンロード：</strong><br><a href="https://github.com/anthonytsai68/souji/releases/latest">GitHub Releases</a> から最新の <code>.dmg</code> をダウンロードし、Souji を <code>/Applications</code> にドラッグ。</div></div>
+    <div class="install-step"><div class="step-num">3</div><div class="step-text"><strong>フルディスクアクセスを許可：</strong><br>初回起動時にフルディスクアクセス（FDA）の設定を案内します。許可すると70%以上のジャンクを検出でき、アプリを完全にアンインストールできます。</div></div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+  <h2 class="section-title">私たちの約束</h2>
+  <div class="promise-list">
+    <div class="promise-item"><span class="promise-check">✓</span><span><strong>ゴミ箱へ、rm は使わない。</strong> すべてシステムAPI経由でゴミ箱へ。間違えたら戻せます。</span></div>
+    <div class="promise-item"><span class="promise-check">✓</span><span><strong>テレメトリなし。</strong> 分析、クラッシュレポート、ネットワーク通信は一切なし。</span></div>
+    <div class="promise-item"><span class="promise-check">✓</span><span><strong>誇大広告なし。</strong> 「47GBのジャンクを検出！」などの赤い警告は表示しません。</span></div>
+    <div class="promise-item"><span class="promise-check">✓</span><span><strong>削除前に確認。</strong> 各項目の実際のパスを表示。自動削除はありません。</span></div>
+    <div class="promise-item"><span class="promise-check">✓</span><span><strong>MIT オープンソース。</strong> ソースコードは <a href="https://github.com/anthonytsai68/souji">github.com/anthonytsai68/souji</a> で公開。フォークも自由。</span></div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+  <h2 class="section-title">よくある質問</h2>
+  <div class="faq">
+    <details><summary>Souji は本当に無料ですか？</summary><div class="faq-answer">はい。Souji は完全無料で MIT ライセンスのオープンソースです。サブスクリプション、トライアル、有料機能は一切ありません。</div></details>
+    <details><summary>CleanMyMac との違いは？</summary><div class="faq-answer">CleanMyMac は年 $40+、クローズドソース、テレメトリあり。Souji は無料、MIT オープンソース、テレメトリなし。クリーニング品質は同等ですが、Souji は誇大広告や恐怖を与えるスキャンを行いません。</div></details>
+    <details><summary>データを収集しますか？</summary><div class="faq-answer">一切しません。テレメトリ、分析、クラッシュレポート、ネットワーク通信はありません。完全にオフラインで動作します。</div></details>
+    <details><summary>安全ですか？</summary><div class="faq-answer">すべてゴミ箱経由で削除。削除前に各項目を確認可能。高リスクのシステムパスはコードでハード排除。MIT 公開ですべてのコードを確認できます。</div></details>
+    <details><summary>対応言語は？</summary><div class="faq-answer">日本語、English、繁體中文、한국어。設定からいつでも切り替えられます。</div></details>
+  </div>
+</div>
+</section>
+
+</div><!-- /lang-ja -->
+
+<!-- ═══ 한국어 ═══ -->
+<div id="lang-ko" class="lang-content">
+
+<div class="wrap hero">
+  <span class="hero-icon">🧹</span>
+  <h1>Souji</h1>
+  <p class="tagline">Mac을 정리하세요. 무료 오픈소스 Mac 클리너 및 앱 제거 도구. 구독 불필요, 텔레메트리 없음, 과장 광고 없음.</p>
+  <div class="hero-meta">
+    <span>🔓 무료 &amp; 오픈소스</span>
+    <span>🛡️ 텔레메트리 없음</span>
+    <span>🍎 macOS 13+</span>
+    <span>💎 Apple Silicon + Intel</span>
+  </div>
+  <div class="cta-group">
+    <a href="https://github.com/anthonytsai68/souji/releases/latest" class="btn btn-primary">📥 Souji 다운로드</a>
+    <a href="#install" class="btn btn-secondary">🍺 Homebrew 설치</a>
+    <a href="https://github.com/anthonytsai68/souji" class="btn btn-ghost">GitHub ↗</a>
+  </div>
+</div>
+
+<section>
+<div class="wrap">
+  <h2 class="section-title">Souji의 기능</h2>
+  <p class="section-sub">삭제된 모든 파일은 휴지통으로 이동합니다. 실수해도 복원 가능합니다. 삭제 전에 항목을 검토할 수 있습니다.</p>
+  <div class="features">
+    <div class="feat"><div class="feat-icon">🗑️</div><h3>앱 완전 제거</h3><p>앱과 함께 모든 환경설정, 캐시, 컨테이너, 로그인 항목, 로그 파일을 함께 삭제합니다. 10단계 매칭 엔진으로 완벽한 정리.</p></div>
+    <div class="feat"><div class="feat-icon">🔍</div><h3>고립 파일 탐색</h3><p>더 이상 존재하지 않는 앱이 남긴 파일을 찾습니다. 설치된 앱과 비교하고 영구 무시 목록으로 오탐지를 방지합니다.</p></div>
+    <div class="feat"><div class="feat-icon">⚡</div><h3>스마트 클리너</h3><p>시스템 정크, 사용자 캐시, Xcode DerivedData, Homebrew, npm/yarn/pnpm, Docker, 메일 첨부파일, 대용량 파일 — 모두 병렬 스캔.</p></div>
+    <div class="feat"><div class="feat-icon">🕐</div><h3>예약 정리</h3><p>1시간~1개월 간격으로 자동 정리 설정 가능. 실제로 삭제할 항목이 있을 때만 실행됩니다.</p></div>
+    <div class="feat"><div class="feat-icon">🛡️</div><h3>프라이버시 우선</h3><p>텔레메트리 제로. 분석, 충돌 리포트, 네트워크 통신이 전혀 없습니다.</p></div>
+    <div class="feat"><div class="feat-icon">🌐</div><h3>4개 언어 지원</h3><p>한국어, English, 繁體中文, 日本語. 설정에서 언제든지 전환 가능.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- wow.to PROMO (ko) -->
+<section>
+<div class="wrap">
+  <div class="promo">
+    <h2>✂️ Souji로 공유, <strong>wow.to</strong>로 단축</h2>
+    <p>Souji 사용자는 깔끔함의 가치를 압니다. 그래서 <strong>wow.to</strong>를 만들었습니다 — 빠르고, 커스터마이즈 가능하며, 영구적인 URL 단축 서비스입니다. Souji가 Mac을 깨끗하게 유지하는 것처럼, wow.to가 링크를 간결하게 관리합니다.</p>
+    <a href="https://wow.to" class="btn">✨ wow.to 사용해보기 →</a>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+  <h2 class="section-title">Souji 설치하기</h2>
+  <p class="section-sub">두 가지 방법. macOS 13(Ventura) 이상 필요.</p>
+  <div class="install-steps">
+    <div class="install-step"><div class="step-num">1</div><div class="step-text"><strong>Homebrew (권장):</strong><br>터미널에서 <code>brew install --cask souji</code> 실행 후 애플리케이션 폴더에서 Souji 실행.</div></div>
+    <div class="install-step"><div class="step-num">2</div><div class="step-text"><strong>수동 다운로드:</strong><br><a href="https://github.com/anthonytsai68/souji/releases/latest">GitHub Releases</a>에서 최신 <code>.dmg</code> 다운로드 후 Souji를 <code>/Applications</code>로 드래그.</div></div>
+    <div class="install-step"><div class="step-num">3</div><div class="step-text"><strong>전체 디스크 접근 권한 부여:</strong><br>첫 실행 시 Souji가 전체 디스크 접근(FDA) 설정을 안내합니다. 권한을 부여하면 70% 이상의 정크를 감지하고 앱을 완전히 제거할 수 있습니다.</div></div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+  <h2 class="section-title">우리의 약속</h2>
+  <div class="promise-list">
+    <div class="promise-item"><span class="promise-check">✓</span><span><strong>휴지통으로, rm 사용 안 함.</strong> 모든 파일이 시스템 API를 통해 휴지통으로 이동. 실수해도 복원 가능.</span></div>
+    <div class="promise-item"><span class="promise-check">✓</span><span><strong>텔레메트리 없음.</strong> 분석, 충돌 리포트, 네트워크 통신 전혀 없음.</span></div>
+    <div class="promise-item"><span class="promise-check">✓</span><span><strong>과장 광고 없음.</strong> "47GB 정크 발견!" 같은 빨간 경고 표시 없음.</span></div>
+    <div class="promise-item"><span class="promise-check">✓</span><span><strong>삭제 전 검토.</strong> 각 항목의 실제 경로 표시. 자동 삭제 없음.</span></div>
+    <div class="promise-item"><span class="promise-check">✓</span><span><strong>MIT 오픈소스.</strong> <a href="https://github.com/anthonytsai68/souji">github.com/anthonytsai68/souji</a>에서 모든 코드 확인 가능. 포크 환영.</span></div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+  <h2 class="section-title">자주 묻는 질문</h2>
+  <div class="faq">
+    <details><summary>Souji는 정말 무료인가요?</summary><div class="faq-answer">네. Souji는 완전 무료이며 MIT 라이선스 오픈소스입니다. 구독, 평가판, 유료 기능이 전혀 없습니다.</div></details>
+    <details><summary>CleanMyMac과 어떻게 다른가요?</summary><div class="faq-answer">CleanMyMac은 연 $40+, 폐쇄 소스, 텔레메트리 포함. Souji는 무료, MIT 오픈소스, 텔레메트리 없음. 청소 품질은 유사하지만 Souji는 과장 광고나 공포 심리를 이용한 스캔을 하지 않습니다.</div></details>
+    <details><summary>데이터를 수집하나요?</summary><div class="faq-answer">전혀 없습니다. 텔레메트리, 분석, 충돌 리포트, 네트워크 통신이 없습니다. 완전히 오프라인에서 작동합니다.</div></details>
+    <details><summary>안전한가요?</summary><div class="faq-answer">모든 삭제는 휴지통을 통해 이루어집니다. 삭제 전 각 항목을 검토할 수 있습니다. 고위험 시스템 경로는 코드에서 하드 제외됩니다. MIT 오픈소스로 모든 코드를 확인할 수 있습니다.</div></details>
+    <details><summary>지원 언어는?</summary><div class="faq-answer">한국어, English, 繁體中文, 日本語. 설정에서 언제든지 전환 가능합니다.</div></details>
+  </div>
+</div>
+</section>
+
+</div><!-- /lang-ko -->
+
+<!-- ═══ Footer ═══ -->
+<footer>
+<div class="wrap">
+  <div class="footer-links">
+    <a href="https://github.com/anthonytsai68/souji">GitHub</a>
+    <a href="https://github.com/anthonytsai68/souji/releases/latest">Download</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="https://wow.to">wow.to</a>
+  </div>
+  <p>MIT Licensed · Built on <a href="https://github.com/momenbasel/PureMac">PureMac</a> · Short links by <a href="https://wow.to">wow.to</a></p>
+</div>
+</footer>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.lang-content').forEach(el => el.classList.remove('active'));
+  document.getElementById('lang-' + lang).classList.add('active');
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelector('.lang-btn[data-lang="' + lang + '"]').classList.add('active');
+  // Update html lang attribute + title
+  const titles = {
+    'en': 'Souji — Free Open-Source Mac Cleaner & App Uninstaller',
+    'zh-Hant': 'Souji 掃除 — 免費開源 Mac 清理工具',
+    'ja': 'Souji（掃除）— 無料オープンソース Mac クリーナー',
+    'ko': 'Souji — 무료 오픈소스 Mac 클리너'
+  };
+  document.documentElement.lang = lang;
+  document.title = titles[lang] || titles['en'];
+  // Update og:title
+  document.querySelector('meta[property="og:title"]').content = document.title;
+  // Update canonical with lang param
+  const link = document.querySelector('link[rel="canonical"]');
+  if (lang === 'en') {
+    link.href = 'https://souji.wow.to/';
+  } else {
+    link.href = 'https://souji.wow.to/?lang=' + lang;
+  }
+  // Update hreflink on alternate links
+  document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(el => {
+    if (el.getAttribute('hreflang') === lang) {
+      el.setAttribute('href', link.href);
+    }
+  });
+  // Push state for back button
+  const url = lang === 'en' ? '/' : '/?lang=' + lang;
+  history.pushState({lang: lang}, '', url);
+  // Scroll to top smoothly
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// Read lang from URL on load
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const lang = params.get('lang') || 'en';
+  if (lang !== 'en') switchLang(lang);
+})();
+
+// Handle browser back/forward
+window.addEventListener('popstate', function(e) {
+  const params = new URLSearchParams(window.location.search);
+  const lang = params.get('lang') || 'en';
+  switchLang(lang);
+});
+</script>
+</body>
+</html>

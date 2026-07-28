@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://souji.wow.to/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://souji.wow.to/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://souji.wow.to/?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://souji.wow.to/?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://souji.wow.to/?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://souji.wow.to/"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://souji.wow.to/privacy.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+</urlset>
