@@ -1,0 +1,377 @@
+/* Sidebar (MainWindow) */
+"Overview" = "개요";
+"Applications" = "응용 프로그램";
+"Cleanup" = "정리";
+"Dashboard" = "대시보드";
+"Installed Apps" = "설치된 앱";
+"Orphaned Files" = "고립 파일";
+"Souji" = "Souji";
+"Ready to clean" = "정리 준비 완료";
+"Limited access" = "제한된 접근";
+"Full Disk Access granted" = "전체 디스크 접근 권한 부여됨";
+"Grant FDA in Settings" = "설정에서 FDA 허용";
+"Select a category from the sidebar to get started." = "시작하려면 사이드바에서 카테고리를 선택하세요.";
+
+/* FDA toast + clean error alert (MainWindow) */
+"Couldn't clean everything" = "모두 정리할 수 없습니다";
+"Open System Settings" = "시스템 설정 열기";
+"OK" = "확인";
+"Full Disk Access required" = "전체 디스크 접근 권한 필요";
+"macOS blocks Souji from cleaning caches and uninstalling apps until you grant access." = "Souji가 캐시를 정리하고 앱을 제거하려면 전체 디스크 접근 권한을 허용해야 합니다.";
+"Grant Access" = "접근 허용";
+
+/* Permission Sheet */
+"Grant Full Disk Access" = "전체 디스크 접근 허용";
+"%lld item(s) need Full Disk Access" = "%lld개 항목에 전체 디스크 접근 권한이 필요합니다";
+"Uninstalling %@: %lld file(s) need Full Disk Access" = "%@ 제거 중: %lld개 파일에 전체 디스크 접근 권한이 필요합니다";
+"%lld item(s) need Full Disk Access to remove. Tap Grant Access to fix in one step." = "%lld개 항목을 제거하려면 전체 디스크 접근 권한이 필요합니다. 접근 허용을 탭하여 한 번에 해결하세요.";
+"Couldn't remove %@%@. They may be in use or protected by macOS." = "%@%@을(를) 제거할 수 없습니다. 사용 중이거나 macOS가 보호하고 있을 수 있습니다.";
+" and %lld more" = " 외 %lld개";
+"Access granted. Retrying…" = "접근 권한이 부여되었습니다. 재시도 중…";
+"1-tap setup. We'll detect the change automatically." = "원클릭 설정. 변경 사항을 자동으로 감지합니다.";
+"Open Settings & reveal Souji" = "설정 열기 및 Souji 표시";
+"We'll open both windows side-by-side." = "두 창을 나란히 엽니다.";
+"Turn on Souji" = "Souji 켜기";
+"Toggle the row that appears." = "나타나는 행을 토글하세요.";
+"Authenticate" = "인증";
+"Touch ID or password." = "Touch ID 또는 암호.";
+"We auto-retry — no need to come back." = "자동으로 재시도합니다 — 다시 돌아올 필요 없습니다.";
+"Watching for permission change…" = "권한 변경 감시 중…";
+"Souji not in the list?" = "Souji가 목록에 없나요?";
+"Hide help" = "도움말 숨기기";
+"Try this if Souji doesn't appear:" = "Souji가 나타나지 않으면 다음을 시도하세요:";
+"Reveal app" = "앱 표시";
+"Drag Souji.app into the list" = "Souji.app을 목록으로 드래그하세요";
+"Reset + reprompt" = "초기화 + 다시 요청";
+"Clear stale TCC entry" = "오래된 TCC 항목 지우기";
+"+ %lld more" = "+ %lld개 더";
+"%lld blocked path(s)" = "%lld개 차단된 경로";
+"Access granted" = "접근 권한 부여됨";
+"Retrying the operation now." = "지금 작업을 재시도합니다.";
+"Skip for now" = "지금은 건너뛰기";
+"I granted it — retry" = "권한을 부여했습니다 — 재시도";
+
+/* Dashboard polish */
+"Low space" = "디스크 공간 부족";
+"CLEANING" = "정리 중";
+"Quick Setup" = "빠른 설정";
+"1-tap setup. We'll auto-retry what failed." = "원클릭 설정. 실패한 항목을 자동으로 재시도합니다.";
+"Fix permission" = "권한 수정";
+"Dismiss" = "닫기";
+
+/* Dashboard */
+"Storage" = "저장 공간";
+"Smart Scan" = "스마트 스캔";
+"free of %@" = "%@ 중 사용 가능";
+"%lld%% used" = "%lld%% 사용 중";
+"Used" = "사용 중";
+"Junk" = "정크";
+"Purgeable" = "제거 가능";
+"USED" = "사용 중";
+"SCANNING" = "스캔 중";
+"Free Space" = "사용 가능 공간";
+"Junk Found" = "발견된 정크";
+"Apps" = "앱";
+"of %@ · %lld%% used" = "%@ 중 · %lld%% 사용 중";
+"Run a scan" = "스캔 실행";
+"across %lld categories" = "%lld개 카테고리";
+"installed" = "설치됨";
+"APFS reclaimable" = "APFS 회수 가능";
+"Suggested for you" = "추천 항목";
+"Found so far" = "지금까지 발견됨";
+"By category" = "카테고리별";
+"%@ is using %@" = "%@이(가) %@을(를) 사용 중";
+"Grant Full Disk Access for full results" = "전체 결과를 보려면 전체 디스크 접근 권한을 허용하세요";
+"Without it, most caches and uninstall flows fail." = "권한이 없으면 대부분의 캐시 정리와 앱 제거가 실패합니다.";
+"Action" = "작업";
+"Scanning your Mac" = "Mac 스캔 중";
+"Currently in: %@" = "현재 위치: %@";
+"found" = "발견됨";
+"Your Mac is clean" = "Mac이 깨끗합니다";
+"Scan Again" = "다시 스캔";
+"Clean %@" = "%@ 정리";
+"Clean %@?" = "%@을(를) 정리할까요?";
+"Cleaning…" = "정리 중…";
+"%lld%% complete" = "%lld%% 완료";
+"freed" = "확보됨";
+"Done" = "완료";
+"%lld items" = "%lld개 항목";
+
+/* Common destructive dialog */
+"Clean" = "정리";
+"Cancel" = "취소";
+"This will permanently delete the selected files. This cannot be undone." = "선택한 파일이 영구적으로 삭제됩니다. 되돌릴 수 없습니다.";
+
+/* Category Detail */
+"All Clean" = "모두 깨끗함";
+"No junk files found in this category." = "이 카테고리에서 정크 파일이 발견되지 않았습니다.";
+"Not Scanned" = "스캔되지 않음";
+"Run a scan to analyze this category." = "이 카테고리를 분석하려면 스캔을 실행하세요.";
+"Scan Now" = "지금 스캔";
+"Filter files" = "파일 필터";
+"Scan" = "스캔";
+"Select All" = "모두 선택";
+"Deselect All" = "모두 선택 해제";
+"Largest First" = "큰 순서";
+"Smallest First" = "작은 순서";
+"Sorted: Largest First" = "정렬: 큰 순서";
+"Sorted: Smallest First" = "정렬: 작은 순서";
+"Clean %lld items" = "%lld개 항목 정리";
+"%lld items · %@" = "%lld개 항목 · %@";
+"Scanning…" = "스캔 중…";
+"Rescan" = "다시 스캔";
+"%lld of %lld selected" = "%lld / %lld 선택됨";
+"Reveal in Finder" = "Finder에서 보기";
+"Copy Path" = "경로 복사";
+"Move to Trash" = "휴지통으로 이동";
+
+/* Apps (AppListView) */
+"Search apps" = "앱 검색";
+"Refresh" = "새로고침";
+"Installed Apps (%lld)" = "설치된 앱 (%lld)";
+"Uninstall (%lld files)" = "제거 (%lld개 파일)";
+"Loading installed apps..." = "설치된 앱 로딩 중...";
+"No Apps Found" = "앱을 찾을 수 없음";
+"Could not find any installed applications." = "설치된 응용 프로그램을 찾을 수 없습니다.";
+"Retry" = "재시도";
+"Application" = "응용 프로그램";
+"Size" = "크기";
+"Select an App" = "앱 선택";
+"Select an app from the list to see all its related files across your system." = "목록에서 앱을 선택하면 시스템 전체의 관련 파일을 볼 수 있습니다.";
+
+/* App Files (AppFilesView) */
+"%lld files" = "%lld개 파일";
+"Scanning for related files..." = "관련 파일 스캔 중...";
+"Checking %lld locations..." = "%lld개 위치 확인 중...";
+"No Related Files" = "관련 파일 없음";
+"No additional files found for %@." = "%@에 대한 추가 파일이 없습니다.";
+"Remove %lld files (%@)" = "%lld개 파일 제거 (%@)";
+"Removal Failed" = "제거 실패";
+"Remove this file" = "이 파일 제거";
+"Remove %@?" = "%@을(를) 제거할까요?";
+"Remove" = "제거";
+"This will permanently delete this file. This action cannot be undone." = "이 파일이 영구적으로 삭제됩니다. 되돌릴 수 없습니다.";
+
+/* Orphans */
+"Scanning for orphaned files..." = "고립 파일 스캔 중...";
+"No Orphaned Files" = "고립 파일 없음";
+"No leftover files from uninstalled apps were found." = "제거된 앱의 잔여 파일이 발견되지 않았습니다.";
+"Scan for Orphans" = "고립 파일 스캔";
+"Orphaned Files (%lld)" = "고립 파일 (%lld)";
+"Remove Selected (%lld)" = "선택 항목 제거 (%lld)";
+"Some files could not be removed" = "일부 파일을 제거할 수 없습니다";
+
+/* Onboarding */
+"Back" = "뒤로";
+"Next" = "다음";
+"Get Started" = "시작하기";
+"Welcome to Souji" = "Souji에 오신 것을 환영합니다";
+"Free, open-source macOS app manager and system cleaner." = "무료 오픈소스 macOS 앱 관리자 및 시스템 클리너.";
+"Find junk files across your system" = "시스템 전체에서 정크 파일 찾기";
+"App Uninstaller" = "앱 제거";
+"Remove apps and all their files" = "앱과 모든 파일 제거";
+"Orphan Finder" = "고립 파일 탐색";
+"Find leftovers from deleted apps" = "삭제된 앱의 잔여 파일 찾기";
+"Full Disk Access" = "전체 디스크 접근";
+"Souji needs Full Disk Access to uninstall apps, find leftover files, and clean protected caches." = "Souji가 앱을 제거하고, 잔여 파일을 찾고, 보호된 캐시를 정리하려면 전체 디스크 접근 권한이 필요합니다.";
+"We'll guide you through the next steps." = "다음 단계를 안내해 드립니다.";
+"In System Settings, do this:" = "시스템 설정에서 다음을 수행하세요:";
+"Privacy & Security → Full Disk Access" = "개인정보 보호 및 보안 → 전체 디스크 접근";
+"Find **Souji** and turn the toggle on" = "**Souji**를 찾아 토글을 켜세요";
+"Authenticate with Touch ID or your password" = "Touch ID 또는 암호로 인증하세요";
+"Reopen Settings" = "설정 다시 열기";
+"Souji isn't in the list — reveal it" = "Souji가 목록에 없습니다 — 표시하기";
+"Reset permissions and re-prompt" = "권한 초기화 및 다시 요청";
+"Hide diagnostics" = "진단 숨기기";
+"Show diagnostics" = "진단 보기";
+"Trouble?" = "문제가 있나요?";
+"Waiting for permission…" = "권한 기다리는 중…";
+"Permission granted." = "권한이 부여되었습니다.";
+"Souji can now manage protected files." = "Souji가 이제 보호된 파일을 관리할 수 있습니다.";
+"You're Ready" = "준비 완료";
+"%lld/%lld protected locations accessible" = "%lld/%lld개의 보호된 위치에 접근 가능";
+"Some features will be limited. You can grant Full Disk Access later in System Settings." = "일부 기능이 제한됩니다. 나중에 시스템 설정에서 전체 디스크 접근 권한을 부여할 수 있습니다.";
+"Trash" = "휴지통";
+"Mail Data" = "메일 데이터";
+"Safari Data" = "Safari 데이터";
+"Desktop" = "데스크탑";
+"Documents" = "문서";
+"TCC Database" = "TCC 데이터베이스";
+"Blocked" = "차단됨";
+
+/* Settings */
+"General" = "일반";
+"Cleaning" = "정리";
+"Schedule" = "예약";
+"About" = "정보";
+"Startup" = "시작";
+"Launch Souji at login" = "로그인 시 Souji 실행";
+"App Scanning" = "앱 스캔";
+"Search sensitivity" = "검색 민감도";
+"Strict" = "엄격";
+"Enhanced" = "향상";
+"Deep" = "심층";
+"Exact bundle ID and name matches only. Safest option." = "번들 ID와 이름이 정확히 일치하는 경우만. 가장 안전함.";
+"Includes partial name matching and bundle ID components." = "부분 이름 일치 및 번들 ID 구성 요소 포함.";
+"Includes company name, entitlements, and team identifier matching." = "회사 이름, 자격 및 팀 식별자 일치 포함.";
+"Language" = "언어";
+"Restart Souji to apply the selected language." = "선택한 언어를 적용하려면 Souji를 다시 시작하세요.";
+"Relaunch Now" = "지금 다시 시작";
+"System Default" = "시스템 기본값";
+"English" = "English";
+"Japanese" = "日本語";
+"Korean" = "한국어";
+"Chinese (Traditional)" = "繁體中文";
+"Safety" = "안전";
+"Confirm before deleting files" = "파일 삭제 전 확인";
+"File Discovery" = "파일 검색";
+"Skip hidden files during scan" = "스캔 시 숨김 파일 건너뛰기";
+"Large Files" = "대용량 파일";
+"Minimum size: %lld MB" = "최소 크기: %lld MB";
+"Files older than: %lld months" = "%lld개월보다 오래된 파일";
+"Automatic Scanning" = "자동 스캔";
+"Enable scheduled scanning" = "예약 스캔 활성화";
+"Scan interval" = "스캔 간격";
+"Auto-clean after scan" = "스캔 후 자동 정리";
+"Auto-purge purgeable space" = "제거 가능 공간 자동 비우기";
+"Notify on completion" = "완료 시 알림";
+"Last run" = "마지막 실행";
+"Version %@" = "버전 %@";
+"Free, open-source macOS app manager." = "무료 오픈소스 macOS 앱 관리자.";
+"GitHub Repository" = "GitHub 저장소";
+"Report an Issue" = "문제 보고";
+"MIT License" = "MIT 라이선스";
+
+/* Cleaning categories (CleaningCategory.rawValue) */
+"System Junk" = "시스템 정크";
+"User Cache" = "사용자 캐시";
+"AI Apps" = "AI 앱";
+"Mail Files" = "메일 파일";
+"Trash Bins" = "휴지통";
+"Large & Old Files" = "대용량 및 오래된 파일";
+"Purgeable Space" = "제거 가능 공간";
+"Xcode Junk" = "Xcode 정크";
+"Brew Cache" = "Brew 캐시";
+"Node Cache" = "Node 캐시";
+"Docker Cache" = "Docker 캐시";
+"Universal Binaries" = "유니버설 바이너리";
+"Language Files" = "언어 파일";
+
+/* Cleaning category descriptions */
+"Scan everything at once" = "모두 한 번에 스캔";
+"System caches, logs, and temporary files" = "시스템 캐시, 로그 및 임시 파일";
+"Application caches and browser data" = "응용 프로그램 캐시 및 브라우저 데이터";
+"Local AI app logs, caches, and optional history" = "로컬 AI 앱 로그, 캐시 및 선택적 기록";
+"Downloaded mail attachments" = "다운로드된 메일 첨부파일";
+"Files in your Trash" = "휴지통에 있는 파일";
+"Files over 100 MB or older than 1 year" = "100MB 초과 또는 1년 이상 지난 파일";
+"APFS purgeable disk space" = "APFS 제거 가능 디스크 공간";
+"Derived data, archives, and simulators" = "파생 데이터, 아카이브 및 시뮬레이터";
+"Homebrew download cache" = "Homebrew 다운로드 캐시";
+"npm, yarn, and pnpm download caches" = "npm, yarn 및 pnpm 다운로드 캐시";
+"Docker images, containers, and build cache" = "Docker 이미지, 컨테이너 및 빌드 캐시";
+"Unused CPU architecture slices in app binaries" = "앱 바이너리의 사용하지 않는 CPU 아키텍처 슬라이스";
+"Unused app localizations" = "사용하지 않는 앱 현지화 파일";
+
+/* Node Cache subcategories */
+"npm cache" = "npm 캐시";
+"yarn classic cache" = "yarn 클래식 캐시";
+"pnpm content-addressable store" = "pnpm 콘텐츠 주소 지정 저장소";
+
+/* Docker Cache helper */
+"Reclaimable (run `docker system prune -af`)" = "회수 가능 (`docker system prune -af` 실행)";
+
+/* Schedule intervals (ScheduleInterval.rawValue) */
+"Every Hour" = "매시간";
+"Every 3 Hours" = "3시간마다";
+"Every 6 Hours" = "6시간마다";
+"Every 12 Hours" = "12시간마다";
+"Daily" = "매일";
+"Weekly" = "매주";
+"Every 2 Weeks" = "2주마다";
+"Monthly" = "매월";
+
+/* Schedule status */
+"Never" = "없음";
+"Not scheduled" = "예약되지 않음";
+
+/* Appearance modes (AppearanceMode.label) */
+"System" = "시스템";
+"Light" = "라이트";
+"Dark" = "다크";
+
+/* Notifications */
+"Found %@ of junk files." = "%@의 정크 파일을 발견했습니다.";
+
+/* Onboarding v2 */
+"Reclaim your Mac" = "Mac을 되찾으세요";
+"Apple sells you small disks. We help you keep them clean." = "Apple은 작은 디스크를 판매합니다. 우리는 깨끗하게 유지하는 것을 돕습니다.";
+"Free. Open source. MIT licensed." = "무료. 오픈소스. MIT 라이선스.";
+"What's inside" = "구성";
+"Three things, done well." = "세 가지 기능, 제대로.";
+"Find caches, logs, broken installs, and the AI-app history hiding in your library." = "라이브러리에 숨겨진 캐시, 로그, 손상된 설치 및 AI 앱 기록을 찾습니다.";
+"Drag an app, see every file it dropped, remove all of it. No leftovers." = "앱을 드래그하면 앱이 남긴 모든 파일을 보고 한 번에 제거합니다. 잔여물 없음.";
+"Surfaces files that outlived the apps that created them." = "해당 앱보다 오래 존재한 파일을 표시합니다.";
+"One permission, then we're done" = "권한 하나만 있으면 됩니다";
+"Permission granted" = "권한 부여됨";
+"Souji can now reach the locations macOS protects by default." = "Souji가 이제 macOS가 기본적으로 보호하는 위치에 접근할 수 있습니다.";
+"macOS hides certain folders from every app until you say otherwise. We need them to find caches and uninstall cleanly." = "macOS는 사용자가 허용할 때까지 모든 앱에서 특정 폴더를 숨깁니다. 캐시를 찾고 깔끔하게 제거하려면 이 권한이 필요합니다.";
+"All set — moving you to the next step." = "모두 준비됨 — 다음 단계로 이동합니다.";
+"Reveal app again" = "앱 다시 표시";
+"Reset permissions" = "권한 초기화";
+"You're ready" = "준비 완료";
+"Ready when you are" = "언제든 준비됨";
+"Hit Start to run your first Smart Scan." = "시작을 눌러 첫 번째 스마트 스캔을 실행하세요.";
+"Skip" = "건너뛰기";
+"Start" = "시작";
+"Continue" = "계속";
+
+/* Drag handle */
+"Drag to the Settings list" = "설정 목록으로 드래그";
+"Drag this icon into the Full Disk Access list in System Settings." = "이 아이콘을 시스템 설정의 전체 디스크 접근 목록으로 드래그하세요.";
+"Tip: drag the icon on the left straight into the list." = "팁: 왼쪽 아이콘을 목록으로 바로 드래그하세요.";
+"Or drag the icon on the left straight into Settings." = "또는 왼쪽 아이콘을 설정으로 바로 드래그하세요.";
+
+/* Dashboard storage composition (v2.7.0) */
+"Storage composition" = "저장 공간 구성";
+"total" = "전체";
+"Free" = "사용 가능";
+
+/* UI polish (v2.8.0): leftover groups + sound toggle */
+"Application" = "응용 프로그램";
+"Caches" = "캐시";
+"Application Support" = "응용 프로그램 지원";
+"Preferences" = "환경설정";
+"Logs" = "로그";
+"Containers" = "컨테이너";
+"Launch Agents" = "시작 에이전트";
+"Other Files" = "기타 파일";
+"Sound" = "사운드";
+"Play sound effects" = "사운드 효과 재생";
+
+/* v2.8.1: purgeable honesty */
+"Managed by macOS" = "macOS가 관리";
+"Reserved by macOS - freed automatically when space is needed" = "macOS가 예약 - 공간이 필요하면 자동으로 확보됨";
+
+/* v2.8.2: large-file folder exclusions (#121) */
+"Excluded Folders" = "제외 폴더";
+"Files inside these folders are skipped from the Large & Old Files scan (Downloads, Documents, Desktop)." = "이 폴더 안의 파일은 대용량 및 오래된 파일 스캔에서 제외됩니다 (다운로드, 문서, 데스크탑).";
+"Remove from exclusions" = "제외에서 제거";
+"Add Folder…" = "폴더 추가…";
+
+/* v2.8.2: orphan ignore list (#114) */
+"Always Ignore" = "항상 무시";
+"Ignore Selected (%lld)" = "선택 항목 무시 (%lld)";
+"Ignored orphans: %lld" = "무시된 고립 파일: %lld";
+"Forget Ignored" = "무시 항목 잊기";
+"Ignored files won't appear in future orphan scans." = "무시된 파일은 향후 고립 파일 스캔에 나타나지 않습니다.";
+
+/* v2.8.3: menu-bar system monitor */
+"System Monitor" = "시스템 모니터";
+"Show system monitor in menu bar" = "메뉴 막대에 시스템 모니터 표시";
+"Live CPU, memory, and disk meters in the menu bar. Souji keeps running in the background while this is on." = "메뉴 막대에서 실시간 CPU, 메모리 및 디스크 미터. 이 기능이 켜져 있는 동안 Souji가 백그라운드에서 실행됩니다.";
+"CPU" = "CPU";
+"Memory" = "메모리";
+"Disk" = "디스크";
+"Open Souji" = "Souji 열기";
+"Quit Souji" = "Souji 종료";
