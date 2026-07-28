@@ -353,8 +353,37 @@ struct AboutSettingsView: View {
             }
 
             Section {
-                Link("GitHub Repository", destination: URL(string: "https://github.com/momenbasel/Souji")!)
-                Link("Report an Issue", destination: URL(string: "https://github.com/momenbasel/Souji/issues")!)
+                Link("GitHub Repository", destination: URL(string: "https://github.com/anthonytsai68/souji")!)
+                Link("Report an Issue", destination: URL(string: "https://github.com/anthonytsai68/souji/issues")!)
+            }
+
+            Section {
+                Text("Support Souji")
+                    .font(.headline)
+                Text("Souji is free and open source. If you find it useful, consider buying me a coffee!")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                HStack(spacing: 16) {
+                    Link(destination: URL(string: "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=admin@wow.to&currency_code=USD")!) {
+                        Label("PayPal", systemImage: "heart.fill")
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 10)
+                            .background(Color(red: 0.02, green: 0.59, blue: 0.40))
+                            .clipShape(Capsule())
+                    }
+                    .buttonStyle(.plain)
+
+                    Link(destination: URL(string: "https://buymeacoffee.com/admin")!) {
+                        Label("Buy Me a Coffee", systemImage: "cup.and.saucer.fill")
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 10)
+                            .background(Color(red: 0.02, green: 0.59, blue: 0.40))
+                            .clipShape(Capsule())
+                    }
+                    .buttonStyle(.plain)
+                }
             }
 
             Section {
