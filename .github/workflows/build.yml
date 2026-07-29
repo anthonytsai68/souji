@@ -36,6 +36,7 @@ jobs:
           APP_DIR="build/Build/Products/Release"
           mkdir -p dist
           cp -R "$APP_DIR/Souji.app" dist/
+          cp README_INSTALL.txt dist/
           hdiutil create -volname Souji -srcfolder dist -ov -format UDZO Souji.dmg
 
       - name: Upload DMG artifact
