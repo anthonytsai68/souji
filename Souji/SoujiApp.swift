@@ -119,12 +119,6 @@ struct SoujiApp: App {
         .defaultSize(width: 1000, height: 680)
         .commands {
             CommandGroup(replacing: .newItem) {}
-            CommandMenu("Updates") {
-                Button("Check for Updates") {
-                    UpdateService.shared.checkForUpdates()
-                }
-                .keyboardShortcut("u", modifiers: [.command, .shift])
-            }
         }
 
         Settings {
