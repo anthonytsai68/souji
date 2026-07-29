@@ -353,7 +353,6 @@ struct AboutSettingsView: View {
             }
 
             Section {
-                Link("GitHub Repository", destination: URL(string: "https://github.com/anthonytsai68/souji")!)
                 Link("Report an Issue", destination: URL(string: "https://github.com/anthonytsai68/souji/issues")!)
             }
 
